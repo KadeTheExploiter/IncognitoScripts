@@ -108,11 +108,6 @@ end
 Global.cloneref = function(X) -- kade
     return X:Clone()
 end
-
-Global.request = function(X) -- kade
-    return game:FindFirstChildOfClass("HttpService"):RequestAsync(X)
-end
-
 Global.clonefunction = function(Old, New) -- kade
     local New = Old
     return New
