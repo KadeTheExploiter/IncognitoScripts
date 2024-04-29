@@ -7,6 +7,7 @@ end
 
 local Global = getfenv(0)
 local FakeCoreGuiEnv = Instance.new("ScreenGui", game:FindFirstChildOfClass("CoreGui"))
+local HttpService =  game:FindFirstChildOfClass("HttpService")
 local VirtualInputManager = game:FindFirstChildOfClass("VirtualInputManager")
 
 Global.Loaded = true
@@ -78,6 +79,7 @@ end
 Global.setfflag = function(Flag, Value) -- kade
     game:SetDefinedFastFlag(Flag, Value)
 end
+
 Global.setfpscap = function(FPS)
     setfflag("DFIntTaskSchedulerTargetFps", FPS)
 end
@@ -87,7 +89,7 @@ Global.cloneref = function(X) -- kade
 end
 
 Global.request = function(X) -- kade
-    return game:FindFirstChildOfClass("HttpService"):RequestAsync(X)
+    return HttpService:RequestAsync(X)
 end
 
 Global.clonefunction = function(Old, New) -- kade
