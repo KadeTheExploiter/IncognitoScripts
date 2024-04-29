@@ -34,11 +34,11 @@ Global.getexecutorname = function() -- kade
     return "Incognito"
 end
 
-Global.gethiddenproperty = function(X, Y)-- kade
-    pcall(function()
+Global.gethiddenproperty = function(X, Y)-- sown helped | kade
+    return select(2, pcall(function()
         local Result = X[Y]
         return Result
-    end)
+    end))
 end
 
 Global.isscriptable = gethiddenproperty
