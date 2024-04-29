@@ -13,7 +13,7 @@ Global.Loaded = true
 Global.getgenv = getgenv
 Global.rconsoleprint = print
 
-local nilinstances = {}
+local nilinstances = {} -- removed
 
 Global.sethiddenproperty = function(X, Y, Z) -- kade
     pcall(function()
