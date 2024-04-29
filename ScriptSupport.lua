@@ -14,15 +14,6 @@ Global.getgenv = getgenv
 Global.rconsoleprint = print
 
 local nilinstances = {}
-game.DescendantRemoving:Connect(function(descendant)
-	nilTable[descendant]=descendant	
-end)
-
-game.DescendantAdded:Connect(function(descendant)
-	if nilTable[descendant] then
-		nilTable[descendant] = nil
-	end
-end)
 
 Global.sethiddenproperty = function(X, Y, Z) -- kade
     pcall(function()
