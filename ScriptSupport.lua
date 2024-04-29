@@ -14,7 +14,16 @@ Global.Loaded = true
 Global.getgenv = getgenv
 Global.rconsoleprint = print
 
-local nilinstances = {} -- removed
+local nilinstances = {}
+game.DescendantRemoving:Connect(function(Descendant)
+	nilinstances[#nilinstances+1]=Descendant	
+end)
+
+game.DescendantAdded:Connect(function(Descendant)
+	if table.find(nilinstances, Descendant) then
+		nilinstances[Descendant] = nil
+	end
+end)
 
 Global.sethiddenproperty = function(X, Y, Z) -- kade
     pcall(function()
