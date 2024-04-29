@@ -75,7 +75,7 @@ end
 
 Global.getinstances = function() -- kade 
     local x = {}
-    for _,v in pairs(game:GetDescendants()) do
+    for i,v in pairs(game:GetDescendants()) do
         if v:IsA("Instance") then
             x[#x+1]=v
         end
@@ -95,7 +95,12 @@ Global.toclipboard = setclipboard
 Global.setrbxclipboard = setclipboard
 
 Global.fireclickdetector = function(ClickDetector) -- pio
-    if typeof(ClickDetector.Parent) ~= "Part" then
+    if typeof(ClickDetector) ~= "ClickDetector" then
+        return
+    end
+
+    local Parent = ClickDetector.Parent
+    if (not Parent) or Parent and typeof(Parent) ~= "Part" then
         return
     end
 
@@ -106,8 +111,28 @@ Global.fireclickdetector = function(ClickDetector) -- pio
 end
 
 Global.cloneref = function(X) -- kade
-    return X:Clone()
+    return X
 end
+
+local HttpService = game:GetService("HttpService")
+Global.request = function(url, method, body) -- kade
+    local Options = {
+        Url = url,
+        Method = method,
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = HttpService:JSONEncode(body)
+    }
+    
+    local response = method == "GET" and HttpService:GetAsync(options) or HttpService:PostAsync(options.Url, options.Body)
+    local data = HttpService:JSONDecode(response)
+
+    return data
+end
+
+
+
 Global.clonefunction = function(Old, New) -- kade
     local New = Old
     return New
