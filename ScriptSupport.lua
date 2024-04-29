@@ -1,13 +1,19 @@
 -- mini script supporter by Kade and others :33
--- should help running some scripts
+-- should help 
+if getfenv(0).OldEnv then
+    for i,v in pairs(getfenv(0).OldEnv) do
+        getfenv(0)[i] = v
+    end
+end
+
+getfenv(0).OldEnv = getfenv(0)
 
 if getfenv(0).Loaded then
-    return
+    --return
 end
 
 local Global = getfenv(0)
 local FakeCoreGuiEnv = Instance.new("ScreenGui", game:FindFirstChildOfClass("CoreGui"))
-local HttpService =  game:FindFirstChildOfClass("HttpService")
 local VirtualInputManager = game:FindFirstChildOfClass("VirtualInputManager")
 
 Global.Loaded = true
@@ -35,7 +41,7 @@ Global.getexecutorname = function() -- kade
     return "Incognito"
 end
 
-Global.gethiddenproperty = function(X, Y)-- sown helped | kade
+Global.gethiddenproperty = function(X, Y)
     return select(2, pcall(function()
         local Result = X[Y]
         return Result
@@ -44,6 +50,16 @@ end
 
 Global.isscriptable = gethiddenproperty
 Global.setscriptable = sethiddenproperty
+
+Global.getscripts = function() 
+    local x = {}
+    for i,v in pairs(game:GetDescendants()) do
+        if v:IsA("Script") then
+            x[#x+1]=v
+        end
+    end
+    return x
+end
 
 Global.hookfunction = function(Old, New) -- kade
     Old = New
@@ -61,7 +77,7 @@ Global.getinstances = function() -- kade
     local x = {}
     for _,v in pairs(game:GetDescendants()) do
         if v:IsA("Instance") then
-            x[x+1]=v
+            x[#x+1]=v
         end
     end
     return x
@@ -79,26 +95,22 @@ Global.toclipboard = setclipboard
 Global.setrbxclipboard = setclipboard
 
 Global.fireclickdetector = function(ClickDetector) -- pio
+    if typeof(ClickDetector.Parent) ~= "Part" then
+        return
+    end
+
     local CameraCalc = workspace.CurrentCamera:WorldToViewportPoint(ClickDetector.Parent.Position)
 
     VirtualInputManager:SendMouseButtonEvent(res.X, res.Y, 0, true, game, 1)
     VirtualInputManager:SendMouseButtonEvent(res.X, res.Y, 0, false, game, 1)
 end
 
-Global.setfflag = function(Flag, Value) -- kade
-    game:SetDefinedFastFlag(Flag, Value)
-end
-
-Global.setfpscap = function(FPS)
-    setfflag("DFIntTaskSchedulerTargetFps", FPS)
-end
-
 Global.cloneref = function(X) -- kade
-    return X
+    return X:Clone()
 end
 
 Global.request = function(X) -- kade
-    return HttpService:RequestAsync(X)
+    return game:FindFirstChildOfClass("HttpService"):RequestAsync(X)
 end
 
 Global.clonefunction = function(Old, New) -- kade
