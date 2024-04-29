@@ -83,7 +83,7 @@ Global.setfpscap = function(FPS)
 end
 
 Global.cloneref = function(X) -- kade
-    return X:Clone()
+    return X
 end
 
 Global.request = function(X) -- kade
