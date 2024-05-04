@@ -1,5 +1,5 @@
 repeat task.wait() until game.Loaded
-local cloneref = cloneref or function(x) return x end
+local cloneref = function(x) return x end
 
 local Incognito = cloneref(game:FindFirstChildOfClass("CoreGui")):FindFirstChild("incognito") or Instance.new("ScreenGui")
 local Player = cloneref(game:FindFirstChildOfClass("Players").LocalPlayer)
