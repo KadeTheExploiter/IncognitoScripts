@@ -127,13 +127,6 @@ Global.request = function(url, method, body) -- kade
     return data
 end
 
-
-
-Global.clonefunction = function(Old, New) -- kade
-    local New = Old
-    return New
-end
-
 Global.mouse1down = function() -- jxsh
     VirtualInputManager:SendMouseButtonEvent(0, 0, 1, true, game, 1)
 end
