@@ -61,10 +61,6 @@ Global.getscripts = function()
     return x
 end
 
-Global.hookfunction = function(Old, New) -- kade
-    Old = New
-end
-
 Global.isnetworkowner = function(Part) -- kade 
     return Part.ReceiveAge == 0
 end
